@@ -13,7 +13,6 @@ const dbConnection = `postgres://postgres:yukipostgres@localhost:${port}/${dbNam
 const db = pgp(dbConnection);
 
 //Read queries
-//To do: add in code to reformat returned data to right shape
 function getHistorybyID(req, res, next) {
   //get out by ID
   db.any(`SELECT id, symbol, lowest, highest, average_price, current_price, week, price, volume 
