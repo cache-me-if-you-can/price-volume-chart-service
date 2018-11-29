@@ -43,16 +43,18 @@ class PriceVolumeChart extends React.Component {
         .then(response => response.json())
         .then(data=>{
             let diff = this.getDifference(data[0].averagePrice, data[0].currentPrice);
+            let sortedPrices = data[0].prices.sort((a,b) => {return a - b});
+            let average = 0.5 * (sortedPrices[0] + sortedPrices[sortedPrices.length - 1])
             this.setState({
-                prices: data[0].prices,
+                prices: sortedPrices,
                 volumes: data[0].volumes,
-                lowest: data[0].lowest,
-                highest: data[0].highest,
-                averagePrice: data[0].averagePrice,
+                lowest: sortedPrices[0],
+                highest: sortedPrices[sortedPrices.length - 1],
+                averagePrice: average,
                 currentPrice: data[0].currentPrice,
                 difference: diff,
-                currentPriceIndex: this.findBarGraphIndex(data[0].currentPrice, data[0].prices, diff>0),
-                averagePriceIndex: this.findBarGraphIndex(data[0].averagePrice, data[0].prices, diff>0),
+                currentPriceIndex: this.findBarGraphIndex(data[0].currentPrice, sortedPrices, diff>0),
+                averagePriceIndex: this.findBarGraphIndex(average, sortedPrices, diff>0),
                 barColor: diff > 0 ? "#20ce99" : "#f45531",
                 xPositionCurrentPrice: (data[0].currentPrice-data[0].lowest)/(data[0].highest-data[0].lowest)*676+this.barWidth
             });
