@@ -9,7 +9,7 @@ const pgp = require('pg-promise')(options);
 //connect to db
 const port = 5432; 
 const dbName = 'price_volume'
-const dbConnection = `postgres://postgres:yukipostgres@localhost:${port}/${dbName}`;
+const dbConnection = `postgres://postgres:yukipostgresql@ec2-54-153-91-60.us-west-1.compute.amazonaws.com:${port}/${dbName}`;
 const db = pgp(dbConnection);
 
 //Read queries
