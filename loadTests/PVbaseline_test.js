@@ -9,7 +9,7 @@ export let options = {
 
 export default function() {
   let id = Math.floor(Math.random() * 1e7);
-  let res = http.get(`http://localhost:3002/api/volumes/symbols/${id}`);
+  let res = http.get(`http://localhost:3002/api/volumes/symbols/${id}`, {tags: {name: 'PostsItemURL'}});
   check(res, {
     "status was 200": (r) => r.status === 200
   });
